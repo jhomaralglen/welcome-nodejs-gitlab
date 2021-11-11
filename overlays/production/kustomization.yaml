@@ -1,0 +1,11 @@
+bases:
+  - ../../base
+
+resources:
+  - sealed-secrets/environment-variables-welcome-nodejs-gitlab-production.yaml
+
+commonLabels:
+  env: prod
+
+patchesStrategicMerge: 
+  - deploymentconfig.patch.yaml

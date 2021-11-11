@@ -1,0 +1,18 @@
+apiVersion:  networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: welcome-nodejs-gitlab
+spec:
+  tls: 
+  - {}
+  rules:
+  - host: welcome-nodejs-gitlab.apps.dev.thebrewery.app
+    http:
+      paths:
+        - pathType: ImplementationSpecific
+          path: "/"
+          backend:
+            service:
+              name: welcome-nodejs-gitlab
+              port:
+                name: http

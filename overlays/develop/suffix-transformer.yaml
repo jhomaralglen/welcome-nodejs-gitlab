@@ -1,0 +1,13 @@
+
+apiVersion: builtin
+kind: PrefixSuffixTransformer
+metadata:
+  name: customSuffix
+suffix: -dev
+fieldSpecs:
+  - kind: DeploymentConfig
+    path: metadata/name
+  - kind: Service
+    path: metadata/name
+  - kind: Ingress
+    path: metadata/name

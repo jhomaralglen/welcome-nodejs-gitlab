@@ -1,0 +1,7 @@
+resources:
+  - deploymentconfig.yaml
+  - service.yaml
+  - ingress.yaml
+
+commonLabels:
+  app: welcome-nodejs-gitlab

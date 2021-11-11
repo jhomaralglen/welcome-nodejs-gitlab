@@ -1,0 +1,20 @@
+bases:
+  - ../../base
+
+resources:
+  - sealed-secrets/docker-pull.yaml
+  - sealed-secrets/gitlab-credential.yaml
+  - sealed-secrets/webhook-interceptor.yaml
+  - sealed-secrets/environment-variables-welcome-nodejs-gitlab-develop.yaml
+
+commonLabels:
+  app: welcome-nodejs-gitlab-dev
+  env: dev
+
+patchesStrategicMerge:
+  - deploymentconfig.patch.yaml 
+  - service.patch.yaml
+  - ingress.patch.yaml 
+
+transformers:
+  - suffix-transformer.yaml

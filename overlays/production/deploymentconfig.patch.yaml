@@ -1,0 +1,38 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: welcome-nodejs-gitlab
+spec:
+  replicas: 2
+  selector:
+    app: welcome-nodejs-gitlab
+    env: prod
+  template:
+    metadata:
+      labels:
+        app: welcome-nodejs-gitlab
+        env: prod
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: environment-variables-welcome-nodejs-gitlab-production
+        image: image-registry.openshift-image-registry.svc:5000/jhomar-welcome-gitlab/welcome-nodejs-gitlab:latest
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          timeoutSeconds: 2
+        name: welcome-nodejs-gitlab
+        ports:
+        - containerPort: 8080
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          timeoutSeconds: 2
